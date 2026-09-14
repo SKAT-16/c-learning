@@ -6,39 +6,6 @@
 static int get_index(char c) { return c - 'a'; }
 static char get_char(int index) { return 'a' + index; }
 
-int main(void) {
-    char *words[] = {
-        "cat",  "car", "cattle", "cart", "carton", "dog",
-        "door", "do",  "apple",  "zoo",  "zebra",
-    };
-    int num_words = sizeof(words) / sizeof(words[0]);
-
-    TrieNode *trie;
-    trie_init(&trie);
-
-    for (int i = 0; i < num_words; i++)
-        trie_insert_word(trie, words[i]);
-
-    printf("-----Trie Tree-----\n");
-    trie_print(trie);
-    printf("\n\n");
-
-    printf("-----Autocomplete Search-----\n");
-
-    // Search 1: Partially matches "cat" but fails on 's'
-    printf("Search 1 (cat):\n");
-    trie_autocomplete_search(trie, "cat");
-
-    // Search 2: A perfectly valid search that should output [do] [dog] [door]
-    printf("\nSearch 2 (do):\n");
-    trie_autocomplete_search(trie, "do");
-    printf("\n\n");
-
-    trie_free(trie);
-
-    return 0;
-}
-
 void trie_init(TrieNode **trie) {
     *trie = malloc(sizeof(TrieNode));
     if (*trie != NULL) {
