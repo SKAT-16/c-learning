@@ -11,7 +11,18 @@
 
 double test(double a) { return a; }
 
+typedef enum { TOKEN_EOF } TokenType;
+
+typedef struct {
+    TokenType type;
+    const char *start;
+    int length;
+    int line;
+} Token;
+
 int main(void) {
+    printf("size of token: %lu\n", sizeof(Token));
+
     int a = 5;
     double b = 3.5;
     const char *str = LINE_FILE;
